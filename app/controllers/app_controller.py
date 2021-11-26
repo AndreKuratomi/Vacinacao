@@ -13,10 +13,9 @@ check_keys = []
 def add_vaccination():
     try:
         previous_data = request.get_json()
-        print(previous_data)
-        # data = {key: data[key] for key in data.copy() if key in valid_keys}
         data = {key: previous_data[key] for key in previous_data if key in valid_keys}
-        print(data)
+        data = {key: values.title() for (key, values) in data.copy().items()}
+
         new_card = Cards(**data)
 
         cpf = data['cpf']
@@ -34,7 +33,6 @@ def add_vaccination():
         values = data.values()
         for elems in values:
             if type(elems) != str:
-                print("OSH!")
                 raise NotStringError
 
         current_app.db.session.add(new_card)
@@ -54,10 +52,6 @@ def add_vaccination():
     except IntegrityError as ie:
         if ie.orig.pgcode == UNIQUE_VIOLATION:
             return {"Erro": "CPF já no banco de dados!"}, 409
-        # print(ie.orig)
-        # print(ie.orig.pgcode)
-        # print(UNIQUE_VIOLATION)
-        # print(ie.orig.pgcode)
 
 
 def get_all():

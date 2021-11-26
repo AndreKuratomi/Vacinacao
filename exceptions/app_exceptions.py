@@ -15,6 +15,7 @@ class AbsentError(Exception):
         self.message = {"Erro": "Uma, ou mais, das chaves requeridas está ausente"}
         super().__init__(self.message)
 
+
 class RepeatedKeyError(Exception):
     def __init__(self):
         self.message = {"Erro": "CPF já no banco de dados!"}

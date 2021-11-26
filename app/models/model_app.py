@@ -2,7 +2,6 @@ from app.configs.database import db
 from sqlalchemy import Column, DateTime, String
 from dataclasses import dataclass
 from datetime import datetime, timedelta
-from ipdb import set_trace
 
 first = datetime.now()
 second = first + timedelta(days=90)
@@ -25,5 +24,3 @@ class Cards(db.Model):
     second_shot_date = Column(DateTime(), default=second)
     vaccine_name = Column(String, nullable=False)
     health_unit_name = Column(String)
-
-    # como normalizar dados?: tudo em caixa baixa
